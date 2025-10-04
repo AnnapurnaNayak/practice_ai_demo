@@ -1,0 +1,5 @@
+Flask
+fpdf
+google-api-python-client # For YouTube Data API
+python-dotenv # For loading environment variables from .env file
+youtube_transcript_api # For fetching YouTube video captions 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Generator</title>
+</head>
+<body>
+    <h1>Enter text to generate PDF</h1>
+    <form id="pdfForm">
+        <input type="text" name="text" id="text" placeholder="Enter text" required>
+        <button type="submit">Generate PDF</button>
+    </form>
+    <script>
+        const form = document.getElementById('pdfForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const text = document.getElementById('text').value;
+
+            const response = await fetch('/generate-pdf', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({text: text})
+            });
+
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "output.pdf";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                window.URL.revokeObjectURL(url);
+            } else {
+                alert('Failed to generate PDF');
+            }
+        });
+    </script>
+</body>
+</html>

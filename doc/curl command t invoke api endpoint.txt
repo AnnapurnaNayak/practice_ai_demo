@@ -1,0 +1,12 @@
+from python terminal 
+--------------------------
+Invoke-WebRequest -Uri http://localhost:5000/generate-pdf `
+    -Method POST `
+    -Headers @{ "Content-Type" = "application/json" } `
+    -Body '{"text":"Hello from curl!"}' `
+    -OutFile output.pdf
+
+
+from command line 
+-----------------
+curl.exe -X POST http://localhost:5000/generate-pdf -H "Content-Type: application/json" -d "{\"text\":\"Hello from curl 123!\"}" --output output.pdf
